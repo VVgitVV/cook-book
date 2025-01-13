@@ -7,6 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Recipe.destroy_all
 Recipe.create(
   name: "Tacos al Pastor",
   description: "Tacos al Pastor are a traditional Mexican dish made with marinated pork that's slow-cooked on a vertical rotisserie. They are served in corn tortillas and topped with pineapple, onions, cilantro, and a squeeze of lime.",

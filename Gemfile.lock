@@ -199,6 +199,9 @@ GEM
     reline (0.6.0)
       io-console (~> 0.5)
     securerandom (0.4.1)
+    simple_form (5.3.1)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -246,6 +249,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
+  simple_form
   sprockets-rails
   stimulus-rails
   turbo-rails

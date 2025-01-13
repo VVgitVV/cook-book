@@ -1,0 +1,7 @@
+<!-- app/views/categories/index.html.erb -->
+<h1>All Categories</h1>
+<ul>
+  <% @categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+</ul>
