@@ -1,5 +1,6 @@
 class Recipe < ApplicationRecord
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
+  has_many :categories, through: :bookmarks
   #has_many :categories, through: :bookmarks
   #instructions are wrong for has_many: categories - don't include
 
