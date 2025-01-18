@@ -7,7 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "json"
+require "open-uri"
+
+Bookmark.destroy_all
 Recipe.destroy_all
+Category.destroy_all
+
+=begin
 Recipe.create(
   name: "Tacos al Pastor",
   description: "Tacos al Pastor are a traditional Mexican dish made with marinated pork that's slow-cooked on a vertical rotisserie. They are served in corn tortillas and topped with pineapple, onions, cilantro, and a squeeze of lime.",
@@ -38,3 +45,31 @@ Recipe.create(
   image_url:"https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-3824_11-2823bb8.jpg?quality=90&webp=true&resize=375,341",
   rating: 8.6
 )
+=end
+
+def recipe_builder(id)
+  meal_url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=#{id}"
+  meal_serialized = URI.open(meal_url).read
+  meal = JSON.parse(meal_serialized )["meals"][0]
+  puts "Creating #{meal["strMeal"]}"
+
+  Recipe.create!(
+    name: meal["strMeal"],
+    description: meal["strInstructions"],
+    image_url: meal["strMealThumb"],
+    rating: rand(2..5.0).round(1)
+  )
+end
+
+categories = ["Breakfast", "Pasta", "Seafood", "Dessert"]
+
+categories.each do |category|
+url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=#{category}"
+recipe_list = URI.open(url).read
+recipes = JSON.parse(recipe_list)
+recipes["meals"].take(5).each do |recipe|
+  recipe_builder(recipe["idMeal"])
+end
+end
+
+puts "Done! #{Recipe.count} recipes created!"

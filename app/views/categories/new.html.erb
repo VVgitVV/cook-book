@@ -1,4 +1,9 @@
-<%= simple_form_for @category do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit %>
-<% end %>
+<div class="form-new mt-5">
+  <h1>Add a new Category</h1>
+
+  <%= simple_form_for @category do |f| %>
+    <%= f.input :name, label: false, placeholder: 'The category name..' %>
+    <%= f.input :photo, as: :file %>
+    <%= f.button :submit, class: 'btn btn-info' %>
+  <% end %>
+</div>

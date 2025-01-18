@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path "banner.jpg" %>')">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @category.photo.key %>')">
   <div>
     <h1><%= @category.name.capitalize  %></h1>
   </div>
@@ -14,7 +14,7 @@
     <% @category.bookmarks.each do |bookmark| %>
       <div class="card-trip">
 
-        <img src="<%= bookmark.recipe.image_url%>">
+        <img src="<%= bookmark.recipe.image_url %>">
 
         <%= link_to bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{bookmark.recipe.name} from your #{@category.name} list"}, class: 'btn-delete' do %>
           <i class="fa-solid fa-trash"></i>
